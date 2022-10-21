@@ -21,7 +21,7 @@ HUMR_v1.3.2　※旧
  
 
 ### ダウンロード
-[こちら](https://github.com/mukaderabbit/mukaderabbit-HyakuashiUdonMotionRecorder-HUMR-/releases)
+直接コードを書き換えてください。
 
 内容物
 
@@ -34,11 +34,13 @@ HUMR_v1.3.2　※旧
   - InteractRecorder Udon C# Program Asset.asset
   - HUMR.Recorder.cs
   - HUMR.InteractRecorder.cs
+  - HUMR.RecordButton.cs
 - HUMR_OutputLogLoader
   - ReadMe(OutputLogLoader).txt
   - OutputLogLoader.cs
   - OutputLogLoaderEditor.cs
   - HUMRImportFBXSettings
+  - SettingHUMR.cs
   
 ### 導入の手順（動画解説）
    https://youtu.be/gUE8OJ9EQlo　（Unity2019.4.31f1）
@@ -62,6 +64,27 @@ Packages\HUMR_OutputLogLoader\Runtime\Scripts\Csharp\OutputLogLoader.csをアバ
 下にあるLoadLogToExportAnimと書かれたボタンを押します。
 Assets\HUMR\FBXs\DisplayName\の下にHumanoidAnimationが出力されます。
 
+### 導入の手順(テイク機能)
+
+主に音楽のPV等撮影向けの機能です。
+
+UI->Textを使います。TMPROを使う場合は適宜コードを書き換えてください。
+
+1. RecordButton.csをアタッチします。
+
+2. オーディオソースをRecordButton.AuSにアタッチします。
+
+3. 使用する音楽等のオーディオクリップをRecordButton.Musicにアタッチします。
+
+4. RecordButton.timeから再生位置を指定します(途中からの再生でも可能)
+
+5. UI.Textを用意し、アタッチします。
+
+6. ワールドをアップロードします。
+
+7. アップロードしたワールドに入り、レコードキーを押してモーションをキャプチャします。再びレコードキーを押すとキャプチャが止まります。もう一度レコードキーを押すとモーションキャプチャが始まり、テイク数が増えていきます。
+
+	※ レコードキーはjoystick button 2 または KeyCode.Returnに割り当てられています。変更する場合はUpdate内を変更してください。
 
 ### 導入の手順(Recorder)　※旧
 
@@ -96,6 +119,10 @@ v1.3.1(2021/09/12) v1.3でunitypackageに反映が漏れていた修正を反映
 v1.3.2(2021/11/27) DisplayNameにファイルパスに使用できない文字を使用していた場合に対応 ->OutputLogLoaderをv1.3.1に更新　InteractRecorder.prefabのU#参照が外れていたのを修正,誤字を修正 ->Recorderをv1.1.1に更新
 
 VCC_v1.0.0(2022/09/22) VCC向けに諸々を更新
+
+RCN 1.0.0(2022/10/22) 
+ - 一回の起動で複数テイクが取れる機能を追加。
+ - 位置ズレを修正する機能を追加。
 
 ### トラブルシューティング　Q&A
 
