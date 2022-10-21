@@ -1,4 +1,4 @@
-
+﻿
 /*******
  * OutputLogLoaderEditor.cs
  * 
@@ -28,6 +28,12 @@ namespace HUMR
 
         public override void OnInspectorGUI()
         {
+            string manifest = File.ReadAllText(@"Packages\manifest.json");
+            if (!manifest.Contains("com.unity.formats.fbx"))
+            {
+                EditorGUILayout.HelpBox("FBX Exporterのインストールが必要です\n\nUnity上部の[Window]タブを開き、[Package Manager]をクリック\n開かれたPackagesタブの上部にある[Advanced]をクリック➞[Show preview packages]を選択\nPackagesタブ左のリストに[FBX Exporter]が出てくるので選択、右上の[Install]をクリックしてください", MessageType.Warning, true);
+                return;
+            }
 
             //元のInspector部分を表示
             base.OnInspectorGUI();
@@ -46,15 +52,24 @@ namespace HUMR
             }
             else
             {
+                // Your Motion Data Path
                 path = System.Environment.GetEnvironmentVariable("USERPROFILE");
                 path += @"\AppData\LocalLow\VRChat\VRChat";
             }
             targetScript.OutputLogPath = path;
 
             string[] files = Directory.GetFiles(path, "*.txt");
+            string[] str;
             for (int i = 0; i < files.Length; i++)
             {
-                files[i] = files[i].Substring(files[i].Length - 13).Remove(9);
+                /*
+                 *  Example:
+                 *      C:\Users\YourUser\AppData\LocalLow\VRChat\VRChat\*.txt
+                 *      split('\\') index = 7
+                 */
+                
+                str = files[i].Split('\\');
+                files[i] = str[7];
             }
 
 
@@ -77,6 +92,13 @@ namespace HUMR
             //PrivateMethodを実行する用のボタン
             if (GUILayout.Button("LoadLogToExportAnim"))
             {
+                /*
+                 *  Example:
+                 *      Target Script Name = "Character Name"
+                 *      Target File = "Motion Take Number.txt"
+                 *      Set Animation Name = "Motion Character Name"
+                 */
+                SettingHUMR.Anim = string.Format("{0} {1}",files[index].Split('.')[0].Split(' ')[0] , targetScript.getname());
                 ExecuteEvents.Execute<OutputLogLoaderinterface>(
                 target: targetScript.gameObject,
                 eventData: null,
@@ -86,4 +108,4 @@ namespace HUMR
         }
     }
 }
- #endif
+# enfif

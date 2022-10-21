@@ -1,4 +1,4 @@
-
+﻿
 /*******
  * HUMRImportFBXSettings.cs
  * 
@@ -57,9 +57,9 @@ namespace HUMR
                     MIclip.keepOriginalOrientation = true;
                     MIclip.lockRootHeightY = true;
                     MIclip.keepOriginalPositionY = true;
-                    //MIclip.lockRootPositionXZ = true;
-                    //MIclip.keepOriginalPositionXZ = true;
-                    
+                    MIclip.lockRootPositionXZ = true;
+                    MIclip.keepOriginalPositionXZ = true;
+                    MIclip.name = SettingHUMR.Anim;
                     if (MIclip.name == "")
                     {
                         MIclip.name = "HUMRAnimation";
@@ -72,4 +72,4 @@ namespace HUMR
 
     }
 }
- #endif
+#endif
